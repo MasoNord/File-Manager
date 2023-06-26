@@ -1,0 +1,21 @@
+{
+  "name": "filemanager",
+  "version": "1.0.0",
+  "description": "Implementation of a simple file manager using pure nodejs",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MasoNord/File-Manager.git"
+  },
+  "author": "Masonord",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MasoNord/File-Manager/issues"
+  },
+  "homepage": "https://github.com/MasoNord/File-Manager#readme",
+
+  "type":"module"
+}
