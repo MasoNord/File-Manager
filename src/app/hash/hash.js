@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import fs from 'fs';
-import {Path} from "../path.js";
+import {Path} from "../util/path.js";
 
 const objPath = new Path();
 

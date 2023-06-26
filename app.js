@@ -1,25 +1,18 @@
 import process from 'process';
 import readline from 'readline';
 
-import {nav} from "./nwd/nav.js";
-import {fo} from "./fo/fo.js";
-import {si} from "./si/si.js";
-import {main_hash} from './hash/hash.js';
-import {main_comp} from './comp/comp.js';
-import {main_decomp} from "./decomp/decomp.js";
+import {nav} from "./src/app/nwd/nav.js";
+import {fo} from "./src/app/fo/fo.js";
+import {si} from "./src/app/si/si.js";
+import {main_hash} from './src/app/hash/hash.js';
+import {main_comp} from './src/app/comp/comp.js';
+import {main_decomp} from "./src/app/decomp/decomp.js";
 
-import {Path} from "./path.js";
+import {Path} from "./src/app/util/path.js";
 
 /*
     -TODO: make function for getting name of working OS and for different operating systems
     create different versions of subtasks
-    
-    -TODO: if I will have enough time, try to make all function async
-    
-    -TODO: fix problem problem "slice" part for functions
-
-    -TODO: fix problem with path_to_file either you want to do something with a file in current directory 
-    or pick full path to a file starting from disk drive 
 
 */
 
@@ -69,7 +62,7 @@ function main() {
             }
 
             switch(command) {
-            case "up": case "ls": case "cd": case "cd..":
+            case "up": case "ls": case "cd":
                 path.setDirArr();
                 nav(command, slice);
                 break;
@@ -88,7 +81,7 @@ function main() {
             case "decompress":
                 main_decomp(slice);
                 break;
-            case "cls": case "clear":
+            case "\n":
 
                 break;
             default:

@@ -1,9 +1,10 @@
 import process from "process";
 import console, { table } from "console";
-import os from 'os';
 import fs from 'fs';
 
-import {Path} from "../path.js";
+import {Path} from "../util/path.js";
+import { GetSleshes } from '../util/os-parser.js';
+import { CheckOnQuotes } from "../util/quote-parser.js";
 
 const objPath = new Path();
 
@@ -14,7 +15,7 @@ function up_nav() {
     var TempArr = objPath.getDirArr()
     
     if (TempArr.length > 2) {
-        objPath.setCurrentDir(temp.replace( "\\" + TempArr[TempArr.length - 1], ""));
+        objPath.setCurrentDir(temp.replace( GetSleshes() + TempArr[TempArr.length - 1], ""));
     } else if (TempArr.length === 2) {
         objPath.setCurrentDir(temp.replace(TempArr[TempArr.length - 1], ""));
     }
@@ -26,7 +27,7 @@ function cd_nav(slice) {
     slice = objPath.RelOrAbsolut(slice);
 
     try {
-        if (fs.existsSync(slice) && (fs.lstatSync(slice).isDirectory()))
+        if (fs.existsSync(slice) && (fs.lstatSync(slice).isDirectory()) && CheckOnQuotes(slice))
             objPath.setCurrentDir(slice);
         else {
             process.stdout.write("Cannot find path\n")
@@ -47,12 +48,12 @@ function ls_nav() {
             return console.log("unable to scan directory: " + err);
         } 
         files.forEach(function(file) {
-            if (fs.lstatSync(objPath.getCurrentDir() + "\\" + file).isDirectory()) {
+            if (fs.lstatSync(objPath.getCurrentDir() + GetSleshes() + file).isDirectory()) {
                 values.push({
                     "Name": file,
                     "Type": "directory"
                 });
-            }else if (fs.lstatSync(objPath.getCurrentDir() + "\\" + file).isSymbolicLink()) {
+            }else if (fs.lstatSync(objPath.getCurrentDir() + GetSleshes() + file).isSymbolicLink()) {
                 values.push({
                     "Name": file,
                     "Type": "symbolink"
